@@ -29,3 +29,14 @@ For example, let's say you want to build a recommendation system with data from 
 3. Change the data of the example to your data. If your data is different or more extensive, just forget about it and use the part of your data that is similar to the example. Make sure that it works.
 4. Change the code to adapt it to your specific data and problem.
 
+### Notebooks that call a library
+
+One of the main differences between a professional and an amateur ML project is this. Don't put your functions and classes in the notebooks, instead, create libraries and call them from the notebooks. This is the only way to reuse your code and make it scalable. 
+
+Most of the time, you don't deploy the notebooks, they are used for experimentation and visualization. You deploy the libraries. In addition, if you create libraries, you can test them.
+
+### Why tests are important?
+
+Tests solve one of the most expensive problems in development: maintenance. The way I see testing is like the immune system of your project. It protects your project from bugs and errors and makes sure your project is healthy. 
+
+A strong test pipeline minimizes maintenance. It is one of the best investments you can do in your project, because it will avoid new buggy code in the project, and it will detect breaking changes when using dependencies.
