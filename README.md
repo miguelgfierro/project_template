@@ -1,10 +1,10 @@
 # Machine Learning project template
 
-The objective of this project is to serve as a template for machine learning projects.
+The objective of this repository is to serve as a template for machine learning projects.
 
 ## Getting Started
 
-To set up the project, the easiest way is to copy the all the folders into an empty GitHub repo. Make sure you change the name of the library `miguellib`.
+To set up the project, the easiest way is to copy the all the folders into an empty GitHub repository. Make sure you change the name of the library `miguellib`.
 
 ## Structure
 
@@ -31,9 +31,9 @@ For example, let's say you want to build a recommendation system with data from 
 
 ### Notebooks that call a library
 
-One of the main differences between a professional and an amateur ML project is this. Don't put your functions and classes in the notebooks, instead, create libraries and call them from the notebooks. This is the only way to reuse your code and make it scalable. 
+One of the main differences between a professional and an amateur machine learning project is this. Don't put your functions and classes in the notebooks, instead, create libraries and call them from the notebooks. This is the only way to reuse your code and make it scalable. 
 
-Most of the time, you don't deploy the notebooks, they are used for experimentation and visualization. You deploy the libraries. In addition, if you create libraries, you can test them.
+Most of the time, notebooks are not deployed, they are used for experimentation and visualization. You deploy the libraries. In addition, if you create libraries, you can test them.
 
 ### Why tests are important?
 
