@@ -24,7 +24,7 @@ Here is one of the most practical tips I know about working on machine learning.
 
 For example, let's say you want to build a recommendation system with data from your company. What I would do is something as simple as this:
 
-1. Go to [Recommenders](https://github.com/microsoft/recommenders) and look at an example that a similar dataset structure and compute. For example, if your data is text-based and you want to use GPU, explore the examples of LSTUR or NPA.
+1. Go to [Recommenders](https://github.com/recommenders-team/recommenders) and look at an example that a similar dataset structure and compute. For example, if your data is text-based and you want to use GPU, explore the examples of LSTUR or NPA.
 2. Install the dependencies and run the example. Make sure that it works.
 3. Change the data of the example to your data. If your data is different or more extensive, just forget about it and use the part of your data that is similar to the example. Make sure that it works.
 4. Change the code to adapt it to your specific data and problem.
