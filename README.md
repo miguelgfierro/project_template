@@ -14,6 +14,11 @@ To set up the project, the easiest way is to copy the all the folders into an em
 - miguellib: Libraries with common functions that you use in the project. 
 - tests: Python tests of the libraries.
 
+## Setup
+
+    pip install -e .
+    python -c "import miguellib; print(miguellib.__version__)"
+
 ## Coding Principles
 
 Next there are a few coding principles that I follow when working on machine learning projects.
