@@ -78,6 +78,8 @@ name: my-skill
 description: >
   What this skill does and when agents should use it.
   Include trigger phrases so agents know when to load the skill.
+metadata:
+  version: 1.0.0
 ---
 ```
 
@@ -85,6 +87,36 @@ description: >
 |---------------|----------|-----------------------------------------------------------------------------|
 | `name`        | Yes      | Unique identifier for the skill.                                            |
 | `description` | Yes      | Domain, capabilities, and trigger phrases the agent uses to decide whether to load the skill. |
+
+#### Optional Frontmatter Fields
+
+| Field | Description |
+|-------|-------------|
+| `disable-model-invocation: true` | Only the user can invoke it (not Claude automatically). |
+| `user-invocable: false` | Only Claude can load it (does not appear in the `/` menu). |
+| `allowed-tools` | Tools allowed without asking permission when the skill is active. E.g. `Read Grep Edit`. |
+| `model` | Model to use (`sonnet`, `opus`, `haiku`). |
+| `effort` | Reasoning level: `low`, `medium`, `high`, `max`. |
+| `context: fork` | Run in an isolated subagent. |
+| `agent` | Subagent type when `context: fork`. E.g. `Explore`, `Plan`, `general-purpose`. |
+| `paths` | Globs that limit when the skill auto-activates. E.g. `src/**,tests/**`. |
+| `shell` | Shell for inline commands: `bash` (default) or `powershell`. |
+| `argument-hint` | Autocomplete hint. E.g. `[issue-number]`. |
+| `hooks` | Lifecycle hooks, scoped to the skill. |
+
+#### `metadata` Block
+
+Custom block (not interpreted by Claude Code) for organizing and versioning skills.
+
+```yaml
+metadata:
+  version: 1.0.0
+```
+
+| Field | Description |
+|-------|-------------|
+| `version` | Semantic version of the skill. Required. |
+| `<custom>` | Any additional custom metadata. |
 
 #### Full `SKILL.md` Example
 
