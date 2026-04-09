@@ -1,0 +1,10 @@
+# Setup: pip install pre-commit && pre-commit install
+# This installs a git hook that runs before each commit.
+# It must be run once per repo clone.
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: no-commit-to-branch
+        args: ['--branch', 'main']
