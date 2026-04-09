@@ -125,7 +125,6 @@ description: >
 ---
 
 # Data Validation
-
 1. Load the schema from `config/schema.yaml`.
 2. Run `scripts/validate.py --input <path>`.
 3. Report mismatches as a markdown table.
