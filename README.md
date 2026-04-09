@@ -52,25 +52,25 @@ A strong test pipeline minimizes maintenance. It is one of the best investments 
 
 ```
 ├── skills/
-│   ├── <nombre>/
-│   │   ├── SKILL.md            ← Instrucciones (obligatorio)
-│   │   ├── references/         ← Documentación extensa (opcional)
+│   ├── <name>/
+│   │   ├── SKILL.md            ← Instructions (required)
+│   │   ├── references/         ← Extended documentation (optional)
 │   │   │   ├── reference1.md
 │   │   │   └── reference2.md
-│   │   ├── scripts/            ← Scripts de código (opcional)
+│   │   ├── scripts/            ← Code scripts (optional)
 │   │   │   └── generate.py
-│   │   └── resources/          ← Archivos binarios (opcional)
+│   │   └── resources/          ← Binary files (optional)
 │   │       └── template.pptx
 │   └── ...
 ├── agents/
-│   └── <nombre>.md             ← Frontmatter + system prompt
+│   └── <name>.md               ← Frontmatter + system prompt
 ```
 
 ### Skills
 
 Each skill lives in its own directory under `skills/` and must contain a `SKILL.md` file with YAML frontmatter and the instructions body.
 
-#### Frontmatter mínimo
+#### Minimum Frontmatter
 
 ```yaml
 ---
@@ -81,12 +81,12 @@ description: >
 ---
 ```
 
-| Campo         | Obligatorio | Descripción                                                                 |
-|---------------|-------------|-----------------------------------------------------------------------------|
-| `name`        | Sí          | Identificador único del skill.                                              |
-| `description` | Sí          | Dominio, capacidades y frases de activación que el agente usa para decidir si cargar el skill. |
+| Field         | Required | Description                                                                 |
+|---------------|----------|-----------------------------------------------------------------------------|
+| `name`        | Yes      | Unique identifier for the skill.                                            |
+| `description` | Yes      | Domain, capabilities, and trigger phrases the agent uses to decide whether to load the skill. |
 
-#### Ejemplo completo de `SKILL.md`
+#### Full `SKILL.md` Example
 
 ```yaml
 ---
@@ -109,7 +109,7 @@ The system uses **progressive disclosure**: at startup only the frontmatter is p
 
 Each agent is a single Markdown file under `agents/` with YAML frontmatter and a system prompt body.
 
-#### Frontmatter mínimo
+#### Minimum Frontmatter
 
 ```yaml
 ---
@@ -124,14 +124,14 @@ tools:
 ---
 ```
 
-| Campo         | Obligatorio | Descripción                                                        |
-|---------------|-------------|--------------------------------------------------------------------|
-| `name`        | Sí          | Identificador único del agente.                                    |
-| `description` | Sí          | Cuándo y por qué invocar este agente.                              |
-| `model`       | No          | Modelo a usar (`sonnet`, `opus`, `haiku`). Por defecto hereda del padre. |
-| `tools`       | No          | Lista de herramientas disponibles para el agente.                  |
+| Field         | Required | Description                                                        |
+|---------------|----------|--------------------------------------------------------------------|
+| `name`        | Yes      | Unique identifier for the agent.                                   |
+| `description` | Yes      | When and why to invoke this agent.                                 |
+| `model`       | No       | Model to use (`sonnet`, `opus`, `haiku`). Inherits from parent by default. |
+| `tools`       | No       | List of tools available to the agent.                              |
 
-#### Ejemplo completo de agente
+#### Full Agent Example
 
 ```yaml
 ---
