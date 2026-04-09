@@ -70,7 +70,7 @@ A strong test pipeline minimizes maintenance. It is one of the best investments 
 
 Each skill lives in its own directory under `skills/` and must contain a `SKILL.md` file with YAML frontmatter and the instructions body.
 
-#### Minimum Frontmatter
+#### Frontmatter
 
 ```yaml
 ---
@@ -83,26 +83,22 @@ metadata:
 ---
 ```
 
-| Field         | Required | Description                                                                 |
-|---------------|----------|-----------------------------------------------------------------------------|
-| `name`        | Yes      | Unique identifier for the skill.                                            |
-| `description` | Yes      | Domain, capabilities, and trigger phrases the agent uses to decide whether to load the skill. |
-
-#### Optional Frontmatter Fields
-
-| Field | Description |
-|-------|-------------|
-| `disable-model-invocation: true` | Only the user can invoke it (not Claude automatically). |
-| `user-invocable: false` | Only Claude can load it (does not appear in the `/` menu). |
-| `allowed-tools` | Tools allowed without asking permission when the skill is active. E.g. `Read Grep Edit`. |
-| `model` | Model to use (`sonnet`, `opus`, `haiku`). |
-| `effort` | Reasoning level: `low`, `medium`, `high`, `max`. |
-| `context: fork` | Run in an isolated subagent. |
-| `agent` | Subagent type when `context: fork`. E.g. `Explore`, `Plan`, `general-purpose`. |
-| `paths` | Globs that limit when the skill auto-activates. E.g. `src/**,tests/**`. |
-| `shell` | Shell for inline commands: `bash` (default) or `powershell`. |
-| `argument-hint` | Autocomplete hint. E.g. `[issue-number]`. |
-| `hooks` | Lifecycle hooks, scoped to the skill. |
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Unique identifier for the skill. |
+| `description` | Yes | Domain, capabilities, and trigger phrases the agent uses to decide whether to load the skill. |
+| `metadata` | Yes | Custom block for organizing and versioning (see [`metadata` block](#metadata-block) below). |
+| `disable-model-invocation` | No | Set to `true` so only the user can invoke it (not Claude automatically). |
+| `user-invocable` | No | Set to `false` so only Claude can load it (does not appear in the `/` menu). |
+| `allowed-tools` | No | Tools allowed without asking permission when the skill is active. E.g. `Read Grep Edit`. |
+| `model` | No | Model to use (`sonnet`, `opus`, `haiku`). |
+| `effort` | No | Reasoning level: `low`, `medium`, `high`, `max`. |
+| `context` | No | Set to `fork` to run in an isolated subagent. |
+| `agent` | No | Subagent type when `context: fork`. E.g. `Explore`, `Plan`, `general-purpose`. |
+| `paths` | No | Globs that limit when the skill auto-activates. E.g. `src/**,tests/**`. |
+| `shell` | No | Shell for inline commands: `bash` (default) or `powershell`. |
+| `argument-hint` | No | Autocomplete hint. E.g. `[issue-number]`. |
+| `hooks` | No | Lifecycle hooks, scoped to the skill. |
 
 #### `metadata` Block
 
@@ -113,10 +109,10 @@ metadata:
   version: 1.0.0
 ```
 
-| Field | Description |
-|-------|-------------|
-| `version` | Semantic version of the skill. Required. |
-| `<custom>` | Any additional custom metadata. |
+| Field | Required | Description |
+|-------|----------|-------------|
+| `version` | Yes | Semantic version of the skill. |
+| `<custom>` | No | Any additional custom metadata. |
 
 #### Full `SKILL.md` Example
 
@@ -141,27 +137,32 @@ The system uses **progressive disclosure**: at startup only the frontmatter is p
 
 Each agent is a single Markdown file under `agents/` with YAML frontmatter and a system prompt body.
 
-#### Minimum Frontmatter
+#### Frontmatter
 
 ```yaml
 ---
 name: my-agent
 description: >
   What this agent does and when it should be invoked.
-model: sonnet
-tools:
-  - Read
-  - Edit
-  - Bash
+tools: Read, Write, Glob, Grep, Bash
+skills:
+  - my-skill
+metadata:
+  version: 1.0.0
 ---
 ```
 
-| Field         | Required | Description                                                        |
-|---------------|----------|--------------------------------------------------------------------|
-| `name`        | Yes      | Unique identifier for the agent.                                   |
-| `description` | Yes      | When and why to invoke this agent.                                 |
-| `model`       | No       | Model to use (`sonnet`, `opus`, `haiku`). Inherits from parent by default. |
-| `tools`       | No       | List of tools available to the agent.                              |
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Unique identifier (kebab-case). |
+| `description` | Yes | When and why to delegate to this agent. |
+| `metadata` | Yes | Custom block for organizing and versioning (see [`metadata` block](#metadata-block) above). |
+| `tools` | No | Tools available to the agent. |
+| `skills` | No | Skills preloaded when the agent starts. |
+| `model` | No | Model to use (`sonnet`, `opus`, `haiku`). Inherits from parent by default. |
+| `maxTurns` | No | Maximum number of turns allowed. |
+| `effort` | No | Reasoning level: `low`, `medium`, `high`. |
+| `license` | No | License of the agent. |
 
 #### Full Agent Example
 
@@ -171,11 +172,12 @@ name: test-runner
 description: >
   Run the project test suite and report failures.
   Use when the user asks to run tests or validate changes.
-model: sonnet
-tools:
-  - Read
-  - Bash
-  - Grep
+tools: Read, Bash, Grep
+skills:
+  - test-helpers
+maxTurns: 20
+metadata:
+  version: 1.0.0
 ---
 
 You are a test-runner agent. Your job is to:
